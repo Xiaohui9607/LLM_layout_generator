@@ -17,11 +17,11 @@ pip install --upgrade transformers scipy
 
 ## Download LACA/LASA
 
-[todo]
+Model checkpoints can be downloaded at [https://huggingface.co/xchen16/LACA/tree/main](https://huggingface.co/xchen16/LACA/tree/main)
 
 ## Inference
 ### step 1
-Obtain the bounding boxes response from [ChatGPT](https://chat.openai.com), and save it to llm_response.txt. Two version of the prompts are provided in the _prompts_ folders. Make sure your response format strictly follows the example below:
+Obtain the bounding boxes response from [ChatGPT](https://chat.openai.com), and save it to llm_response.txt. Two versions of the prompts are provided in the _prompts_ folders. Make sure your response format strictly follows the example below:
 
 ```
 Caption: A dog stands and four balloons are in the air.
@@ -36,7 +36,7 @@ Caption: A dog stands and four balloons are in the air.
 ```
 
 ### step 2
-run the generation script
+Run the generation script
 
 ```
 python generate.py --controlnet_path ./checkpoint/laca_800000 --response_file ./llm_response.txt --g1 5.5 --g2 5.5 --tau 0.2
