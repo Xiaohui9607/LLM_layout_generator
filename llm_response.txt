@@ -1,0 +1,8 @@
+Caption: A dog stands and four balloons are in the air.
+
+- "A yellow vase" will be taller and more centrally placed on the canvas to emphasize its shape and size. The vase would typically be narrower than a book.
+
+### Answer
+
+- object 0: A dog [(136, 204, 376, 460)]
+- object 0: Four balloons [(51, 51, 102, 102), (409, 51, 460, 102), (255, 0, 306, 51), (306, 102, 357, 153)]
