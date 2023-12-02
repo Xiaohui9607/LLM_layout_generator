@@ -4,6 +4,8 @@
 
 This code repository accompanies the paper "Reason out Your Layout: Evoking the Layout Master from Large Language Models for Text-to-Image Synthesis." The paper introduces a novel approach to enhance text-to-image (T2I) generative models by using Large Language Models (LLMs) as layout generators and an adapter module for integrating layout into image synthesis. 
 
+![Alt text](https://github.com/Xiaohui9607/LLM_layout_generator/assets/pre_vis.pdf)
+
 
 ### Code Structure
 
