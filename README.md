@@ -2,29 +2,42 @@
 
 ## Overview
 
-This code repository accompanies the paper "Reason out Your Layout: Evoking the Layout Master from Large Language Models for Text-to-Image Synthesis." The paper introduces a novel approach to enhance text-to-image (T2I) generative models by using Large Language Models (LLMs) as layout generators and an adapter module for integrating layout into image synthesis. 
+This code repository accompanies the paper "[**Reason out Your Layout: Evoking the Layout Master from Large Language Models for Text-to-Image Synthesis.**](https://arxiv.org/abs/2311.17126)" The paper introduces a novel approach to enhance text-to-image (T2I) generative models by using Large Language Models (LLMs) as layout generators and an adapter module for integrating layout into image synthesis. 
 
-![Alt text](https://github.com/Xiaohui9607/LLM_layout_generator/assets/pre_vis.png)
+![](https://github.com/Xiaohui9607/LLM_layout_generator/blob/main/assets/pre_vis.png)
 
 
-### Code Structure
+## Requirements
 
-- **Adapter Module**: Contains the implementation of the Layout-Aware Cross-Attention (LACA) adapter, which is central to integrating layout information into the Stable Diffusion model.
+We provide a modified source code of diffusers in the repository.
 
-- **Prompt Design**: Scripts and instructions for designing effective Chain-of-Thought (CoT) prompts to elicit detailed layout generation from LLMs.
+```
+pip install --upgrade transformers scipy
+```
 
-- **Image Generation Example**: An example script demonstrating how to use the adapter module and CoT prompts to generate an image from a textual description.
+## Download LACA/LASA
 
-### Image Demonstration
+[todo]
 
-For an illustration of the method's effectiveness, refer to Figure 2 in the paper. This figure demonstrates the generation pipeline, showing how a caption is first processed by an LLM to generate an object layout, which is then used by the Stable Diffusion model, enhanced with the LACA adapter, to generate the final image【10†source】.
+## Inference
+### step 1
+Obtain the bounding boxes response from [ChatGPT](https://chat.openai.com), and save it to llm_response.txt. Two version of the prompts are provided in the _prompts_ folders. Make sure your response format strictly follows the example below:
 
-### Getting Started
+```
+Caption: A dog stands and four balloons are in the air.
 
-1. **Setup**: Install necessary dependencies as listed in `requirements.txt`.
+[chat gpt reasoning, will be ignored during parsing]
 
-2. **Running the Adapter Module**: Use the provided script to integrate the LACA adapter with the Stable Diffusion model. Ensure the model weights are correctly loaded.
+### Answer
 
-3. **Generating Layouts with LLMs**: Follow the prompt design guidelines to create CoT prompts for the LLMs. These prompts will guide the LLMs to generate detailed object layouts from textual descriptions.
+- object 0: A dog [(136, 204, 376, 460)]
+- object 1: Four balloons [(51, 51, 102, 102), (409, 51, 460, 102), (255, 0, 306, 51), (306, 102, 357, 153)]
+- ...
+```
 
-4. **Image Synthesis**: Use the example script to synthesize an image from a text prompt. The script will utilize the generated layout and the enhanced Stable Diffusion model to produce the final image.
+### step 2
+run the generation script
+
+```
+python generate.py --controlnet_path ./checkpoint/laca_800000 --response_file ./llm_response.txt --g1 5.5 --g2 5.5 --tau 0.2
+```
