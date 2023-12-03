@@ -1,45 +1,14 @@
-# Copyright 2023 The HuggingFace Team. All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Tuple, Union
-
+from typing import Optional
 import torch
 from torch import nn
-from torch.nn import functional as F
 
-from diffusers.configuration_utils import ConfigMixin, register_to_config
+from diffusers.configuration_utils import ConfigMixin
 from diffusers.loaders import FromOriginalControlnetMixin
-from diffusers.utils import BaseOutput, logging
-from diffusers.models.attention_processor import (
-    ADDED_KV_ATTENTION_PROCESSORS,
-    CROSS_ATTENTION_PROCESSORS,
-    AttentionProcessor,
-    AttnAddedKVProcessor,
-    AttnProcessor,
-)
-from diffusers.models.embeddings import TextImageProjection, TextImageTimeEmbedding, TextTimeEmbedding, TimestepEmbedding, Timesteps
+from diffusers.utils import logging
 from diffusers.models.modeling_utils import ModelMixin
-from diffusers.models.unet_2d_blocks import (
-    CrossAttnDownBlock2D,
-    DownBlock2D,
-    UNetMidBlock2DCrossAttn,
-    get_down_block,
-)
 
 from diffusers.models.attention import AdaLayerNorm, BasicTransformerBlock
 from diffusers.models.attention_processor import Attention
-from diffusers.models.unet_2d_condition import UNet2DConditionModel
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -430,20 +399,3 @@ def zero_module(module):
     for p in module.parameters():
         nn.init.zeros_(p)
     return module
-
-# pretrained_model_name_or_path = "runwayml/stable-diffusion-v1-5"
-# unet = UNet2DConditionModel.from_pretrained(
-#     pretrained_model_name_or_path, subfolder="unet", revision=None
-# )
-# a = LayoutInjectionLayers(unet, copy_from_unet=True, use_zero=True)
-# a = a.to('cuda:0')
-# unet = unet.to('cuda:0')
-# cross_attention_kwargs = a.prepare()
-# a.eval()
-# unet.eval()
-# noisy_latent = torch.randn([8, 4, 64, 64]).to('cuda:0')
-# time = torch.tensor([646, 210, 413, 772, 457,  79, 885, 240]).to('cuda:0')
-# encoder_states = torch.randn([8, 77, 768]).to('cuda:0')
-
-# # c = unet(noisy_latent, time, encoder_states)
-# # c1 = unet(noisy_latent, time, encoder_states, cross_attention_kwargs=cross_attention_kwargs)
