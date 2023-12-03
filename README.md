@@ -17,7 +17,7 @@ pip install --upgrade transformers scipy
 
 ## Download LACA/LASA
 
-Model checkpoints can be downloaded at [https://huggingface.co/xchen16/LACA/tree/main](https://huggingface.co/xchen16/LACA/tree/main)
+Model checkpoints can be downloaded at [https://huggingface.co/xchen16/LACA](https://huggingface.co/xchen16/LACA/tree/main)
 
 ## Inference
 ### step 1
