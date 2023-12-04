@@ -39,5 +39,5 @@ Caption: A dog stands and four balloons are in the air.
 Run the generation script
 
 ```
-python generate.py --controlnet_path ./checkpoint/laca_800000 --response_file ./llm_response.txt --g1 5.5 --g2 5.5 --tau 0.2
+python generate.py --controlnet_path ./checkpoints/laca_800000 --response_file ./llm_response.txt --g1 5.5 --g2 5.5 --tau 0.2
 ```
